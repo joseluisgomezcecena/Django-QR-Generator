@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="data">
+        {% if data %}
+            <p>{{ data.work_order }}</p>
+            <p>{{ data.part_number }}</p>
+            <p>{{ data.qty }}</p>
+            <p>{{ data.created_at }}</p>
+            <p>{{ data.updated_at }}</p>
+        {% endif %}
+    </div>
+
+    <div class="qr-img">
+         {% if img_name %}
+             <img src="/media/{{ img_name }}" alt="qr code">
+         {% endif %}
+    </div>
+</body>
+</html>

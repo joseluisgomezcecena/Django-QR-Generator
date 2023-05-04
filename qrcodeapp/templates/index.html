@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de codigo QR</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        main{
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+         select{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button{
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #eee;
+
+        }
+
+        button:hover{
+            background-color: #ddd;
+        }
+
+        .qr-img{
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .qr-img img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>
+            Martech QR Generator
+        </h1>
+        <form method="post" autocomplete="off">
+            {% csrf_token %}
+            <!--
+            <input type="text" name="part_number" id="part_number" placeholder="Numero de parte">
+            -->
+
+            <select name="part_number" id="part_number" required>
+                <option value="">Seleccione un numero de parte</option>
+                {% for part in parts %}
+                    <option value="{{ part.part_number }}">{{ part.part_number }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="text" name="work_order" id="work_order" placeholder="Orden de Trabajo">
+
+            <input type="text" name="quantity" id="quantity" placeholder="Cantidad de piezas">
+
+            <button>Generar</button>
+        </form>
+
+        <div class="qr-img">
+            {% if img_name %}
+                <img src="/media/{{ img_name }}" alt="qr code">
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
